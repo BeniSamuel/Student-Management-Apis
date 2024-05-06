@@ -5,6 +5,13 @@ const config = require("./config");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const cors=require("cors");
+const auth= require("./routes/auth");
+const mongoose=require("mongoose");
+
+
+mongoose.connect(config.db.url,{useNewUrlParser: true,useUnifiedTopology: true})
+.then(()=>console.log("connection made succesfully"))
+.catch((error)=>console.log(error))
 
 const app = express();
 
@@ -31,6 +38,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use("/courses", routes);
+app.use("/register",auth);
 
 const port = config.port.number;
 app.listen(port, () => {
