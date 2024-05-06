@@ -43,7 +43,7 @@ const courses = [
  *                   about:
  *                     type: string
  */
-router.get("/courses", (req, res) => {
+router.get("/", (req, res) => {
     res.json(courses);
 });
 
@@ -77,7 +77,7 @@ router.get("/courses", (req, res) => {
  *       404:
  *         description: Course not found
  */
-router.get("/courses/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     const { id } = req.params;
     const course = courses.find(c => c.id === parseInt(id));
     if (!course) {
@@ -113,7 +113,7 @@ router.get("/courses/:id", (req, res) => {
  *       400:
  *         description: Bad request, missing or invalid parameters
  */
-router.post("/courses", async (req, res) => {
+router.post("/", async (req, res) => {
     const result = await validate(req.body);
     if (result.error) {
         res.status(400).send(result.error.details[0].message);
@@ -165,7 +165,7 @@ router.post("/courses", async (req, res) => {
  *       404:
  *         description: Course not found
  */
-router.put("/courses/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const course = courses.find(c => c.id === parseInt(id));
     if (!course) {
@@ -204,7 +204,7 @@ router.put("/courses/:id", async (req, res) => {
  *       404:
  *         description: Course not found
  */
-router.delete("/courses/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const course = courses.find(c => c.id === parseInt(id))
     if (!course) {
