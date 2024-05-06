@@ -4,5 +4,8 @@ module.exports={
     },
     db:{
         url:"mongodb://localhost/student"
+    },
+    secretkey:{
+        jwt_secret:"bEnI@1Uy12"
     }
 }

@@ -4,6 +4,7 @@ const router=express.Router();
 const Joi=require("joi");
 const Student=require("../models/model")
 const bcrypt=require("bcrypt");
+const config=require("../config")
 
 router.post("/",async(req,res)=>{
 
@@ -30,7 +31,9 @@ router.post("/",async(req,res)=>{
             password:hashedpassword
         })
          newStudent =await newStudent.save()
-         res.status(200).send(newStudent);
+
+         const token= await jwt.sign({email:req.body.email},config.secretkey.jwt_secret);
+         res.status(200).send(newStudent,token);
     }
     catch(error){
         res.status(500).send(error);

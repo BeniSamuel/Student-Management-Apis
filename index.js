@@ -6,6 +6,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const cors=require("cors");
 const auth= require("./routes/auth");
+const login= require("./routes/login")
 const mongoose=require("mongoose");
 
 
@@ -39,6 +40,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 app.use("/courses", routes);
 app.use("/register",auth);
+app.use("/login",login)
 
 const port = config.port.number;
 app.listen(port, () => {
